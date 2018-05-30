@@ -61,6 +61,15 @@
   color: black;
 }
 
+.inner-number:active{
+  color: red;
+}
+
+.inner-number:focus{
+  color: red;
+}
+
+
 .inner-number-last{
   border-right: 0px solid #990099;
 }
