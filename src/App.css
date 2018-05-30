@@ -1,28 +1,86 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.frame{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -300px;
   color: white;
+  border: 2px solid #990099;
+  width: 500px;
+  height: 600px;
+  background: red;
 }
 
-.App-title {
-  font-size: 1.5em;
+.display{
+  font-size: 4em;
+  padding-right: 2%;
+  height: 150px;
+  line-height: 150px;
+  text-align: right;
+  background: #330025;
 }
 
-.App-intro {
-  font-size: large;
+.input-key-frame{
+  width: 100%;
+  height: 448px;
+  margin-top: 2px;
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.input-number-frame{
+  width: 75%;
+  height: 100%;
+  background: white;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.clear{
+  height: 112px;
+  font-size: 2.5em;
+  color: grey;
+  font-weight: 100;
+  text-align: center;
+  line-height: 112px;
+  border-bottom: 2px solid #990099;
+}
+
+.number-frame{
+  height: 112px;
+  display: block;
+}
+
+.inner-number{
+  width: 32.95%;
+  border-right: 2px solid #990099;
+  border-bottom: 2px solid #990099;
+  font-size: 3em;
+  text-align: center;
+  line-height: 112px;
+  display: inline-block;
+  color: black;
+}
+
+.inner-number-last{
+  border-right: 0px solid #990099;
+}
+
+.operator-frame{
+  height: 100%;
+  width: 25%;
+  float: right;
+  display: block;
+  text-align: center;
+  overflow: hidden;
+}
+
+.inner-operator{
+  line-height: 112px;
+  height: 112px;
+  color: white;
+  font-size: 5em;
+  display: inline-block;
+  border-bottom: 2px solid #990099;
+  text-align: center;
+  width: 100%;
 }
