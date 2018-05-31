@@ -12,12 +12,26 @@
 }
 
 .display{
-  font-size: 4em;
+  background: #330025;
+  text-align: right;
   padding-right: 2%;
   height: 150px;
-  line-height: 150px;
-  text-align: right;
-  background: #330025;
+}
+
+.display-process{
+  line-height: 50px;
+  height: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  float: right;
+}
+
+.display-result{
+  font-size: 4em;
+  height: 80px;
+  line-height: 80px;;
+  padding: auto;
+  clear: both
 }
 
 .input-key-frame{
@@ -61,12 +75,12 @@
   color: black;
 }
 
-.inner-number:active{
+.inner-number:active, .inner-number:focus{
   color: red;
 }
 
-.inner-number:focus{
-  color: red;
+.inner-operator:active, .inner-operator:focus{
+  color: blue;
 }
 
 

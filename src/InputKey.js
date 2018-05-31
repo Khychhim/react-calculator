@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class InputKey extends React.Component{
-
-  constructor(){
-    super();
-  }
-
+  
   //passing selecting value back to parent for handle
   handleMouseDown = (value)=>{
     this.props.handleKeyClick(value);
@@ -24,7 +20,6 @@ class InputKey extends React.Component{
     this.eight.blur();
     this.nine.blur();
   }
-
 
   componentDidMount(){
     //listen for keyboard press to set focus on keypad display
