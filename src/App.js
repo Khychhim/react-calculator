@@ -128,6 +128,7 @@ class App extends Component {
     }
   }
 
+  //Logic for calculation
   calculateResult(){
     var result = this.state.numberArray[0];
 
@@ -148,7 +149,6 @@ class App extends Component {
     result = Math.round(result * 100) / 100;
     return result;
   }
-
 
   componentDidMount(){
     window.addEventListener("keypress", this.handleKeyPress.bind(this));
