@@ -83,6 +83,9 @@
   color: blue;
 }
 
+.clear:active, .clear:focus{
+  color: red;
+}
 
 .inner-number-last{
   border-right: 0px solid #990099;

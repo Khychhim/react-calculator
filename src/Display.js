@@ -8,11 +8,6 @@ class Display extends React.Component{
     this.state = {currentText: "", wholeText: ""};
   }
 
-  handle = ()=>{
-    var txt = this.state.txt;
-    console.log(txt.length)
-  }
-
   numberWithCommas(x){
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -22,7 +17,7 @@ class Display extends React.Component{
 
   render() {
     var number = this.numberWithCommas(this.props.number);
-    
+
     return (
         <div className="display">
           <div className="display-process">

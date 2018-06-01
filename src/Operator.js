@@ -24,7 +24,7 @@ class Operator extends React.Component{
 
   //remove listeners
   componentWillUnMount(){
-    document.removeEventListener("keydown", this.handlePressFocus.bind(this));
+    document.removeEventListener("keypress", this.handlePressFocus.bind(this));
     document.removeEventListener("keyup", this.handlePressBlur.bind(this));
   }
 

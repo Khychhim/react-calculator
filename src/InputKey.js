@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class InputKey extends React.Component{
-  
+
   //passing selecting value back to parent for handle
   handleMouseDown = (value)=>{
     this.props.handleKeyClick(value);
@@ -19,6 +19,7 @@ class InputKey extends React.Component{
     this.seven.blur();
     this.eight.blur();
     this.nine.blur();
+    this.clear.blur();
   }
 
   componentDidMount(){
@@ -30,7 +31,7 @@ class InputKey extends React.Component{
 
   //remove listeners
   componentWillUnMount(){
-    document.removeEventListener("keydown", this.handlePressFocus.bind(this));
+    document.removeEventListener("keypress", this.handlePressFocus.bind(this));
     document.removeEventListener("keyup", this.handlePressBlur.bind(this));
   }
 
@@ -64,6 +65,9 @@ class InputKey extends React.Component{
         break;
       case '9':
         this.nine.focus();
+        break;
+      case 'clear':
+        this.clear.focus();
         break;
     }
   }
@@ -100,13 +104,16 @@ class InputKey extends React.Component{
       case '9':
         this.nine.blur();
         break;
+      case 'clear':
+        this.clear.blur();
+        break;
     }
   }
 
   render() {
     return (
       <div className="input-number-frame">
-        <div className="clear">clear</div>
+        <div className="clear" tabIndex="0" onMouseDown={this.handleMouseDown.bind(this, "Delete")} onMouseUp={this.handleMouseUp.bind(this)} ref= {(input) => { this.clear = input }}>clear</div>
         <div className="number-frame">
           <div className="inner-number" tabIndex="0" onMouseDown={this.handleMouseDown.bind(this, "7")} onMouseUp={this.handleMouseUp.bind(this)} ref= {(input) => { this.seven = input }}>7</div>
           <div className="inner-number" tabIndex="0" onMouseDown={this.handleMouseDown.bind(this, "8")} onMouseUp={this.handleMouseUp.bind(this)} ref= { (input) => { this.eight = input }}>8</div>
