@@ -15,7 +15,6 @@ class App extends Component {
                   numberArray: [],
                   operatorArray: [],
                   isEnter: false};
-    this.display = "";
   }
 
   //handle global keyboard press and save value to this.state
@@ -29,6 +28,7 @@ class App extends Component {
     this.handleKeyLogic(keyClick);
   }
 
+  //method that set everything back to initial state
   clearAll(){
     this.setState({operatorPress : "NA"});
     this.setState({calculationProcess: ""});
@@ -44,40 +44,43 @@ class App extends Component {
 
     var regNumber = new RegExp('^[1-9]+$');
     var regSymbolOperator = new RegExp('^([+]|[-]|[/]|Enter|Backspace)$');
-    var regTest = new RegExp('^([+]|[-]|[/])$');
 
+    var number = "";
+
+    // when clear is press
     if(input === "Delete"){
       this.clearAll();
     }
 
+    //when number is press
     if(regNumber.test(input) && this.state.numberPress.length < 10){
-
-      if(this.state.result != ""){
-        this.clearAll();
-        // console.log(this.state.numberPress);
-        // this.setState({numberPress: "22"});
-        // this.setState({result : ""});
-          // console.log(this.setState({numberPress: "99"}));
-
+      //set everything back to initial state
+      if(this.state.isEnter){
+        this.clearAll();  //for some reason, this.state.numberPress is not set empty
+        number = "" + input;  //my fix to the stupid problem of this.state.numberPress
+      }else{
+        number = this.state.numberPress + input;
       }
 
+      //save operators for later calculation
       if(regSymbolOperator.test(this.state.operatorPress)){
         this.state.operatorArray.push(this.state.operatorPress);
       }
 
       this.setState({operatorPress : ""}); //enable operator
-
-      var number = (this.state.numberPress + input);
       this.setState({numberPress: number});
 
     }
 
+    //when operator is press
     if(regSymbolOperator.test(input) && this.state.operatorPress !== "NA"){
 
       var strCalulationProcess = this.state.calculationProcess;
       var strNumber = this.state.numberPress;
 
       if(input === "Enter"){
+        this.setState({isEnter: true});
+
         if(this.state.numberPress == ""){
           this.state.numberArray.push(0);
           this.setState({calculationProcess: this.state.calculationProcess + "0"});
@@ -87,31 +90,35 @@ class App extends Component {
         }
 
         this.state.result = this.calculateResult() + "";
-        this.setState({operatorPress : "NA"});
-        this.setState({isEnter: true});
         this.setState({numberPress : this.state.result});
+        this.setState({operatorPress : "NA"});  //after enter is press, none of the operator will work
       }
-      else if(input === 'Backspace'){ //delete a single number
+      else if(input === 'Backspace'){
+        //delete a single number
         strNumber = (this.state.numberPress).substring(0 , this.state.numberPress.length - 1);
-
         this.setState({numberPress: strNumber});
 
+        //disable operator when the entire display numbers is deleted.
         if(this.state.numberPress == ""){
+          //save operators for later calculation
           if(regSymbolOperator.test(this.state.operatorPress)){
             this.state.operatorArray.push(this.state.operatorPress);
           }
+
           this.setState({operatorPress: "NA"});// disable operator
         }
       }
-      else{ //check if operator is disable
-          if(this.state.operatorPress === ""){ // save previous calculationProcess string + current number + operator
+      else{
+          if(this.state.operatorPress === ""){// calculationProcess = currentNumberDisplay  + operator
               this.setState({calculationProcess: strCalulationProcess + strNumber + " " + input + " "});
-          }else{// current calculationProcess string + current operator value
+          }else{ //calculationProcess = currentCalculationProcess + operator
               strCalulationProcess = strCalulationProcess.substring(0 , strCalulationProcess.length - 3);
               this.setState({calculationProcess: strCalulationProcess + " " + input + " "});
           }
+
           this.setState({operatorPress: input});
 
+          // save current display number for later calculation
           if(regNumber.test(this.state.numberPress)){
             this.state.numberArray.push(parseInt(this.state.numberPress));
           }
@@ -156,7 +163,7 @@ class App extends Component {
     console.log(this.state.numberPress);
     return (
       <div className="frame">
-        <Display number={this.state.numberPress} operator={this.state.operatorPress} calculationProcess = {this.state.calculationProcess}/>
+        <Display number={this.state.numberPress} calculationProcess = {this.state.calculationProcess}/>
         <div className="input-key-frame">
           <InputKey handleKeyClick={this.handleKeyClick.bind(this)} />
           <Operator handleKeyClick={this.handleKeyClick.bind(this)} />
